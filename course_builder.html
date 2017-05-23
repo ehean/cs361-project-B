@@ -1,65 +1,24 @@
-<HTML>
-<HEAD>
-<TITLE>Dynamically add Textbox, Radio, Button in html Form using JavaScript</TITLE>
-<SCRIPT language="javascript">
-
-var input = "document.forms[0].element";
-
-
-async function handleText(type) {
-
-	console.log("handle text called\n");
-
-	//Create an input type dynamically.
-	var newDiv = document.createElement("div");
-	var element = document.createElement("textArea");
-
-	//Assign different attributes to the element.
-	element.setAttribute("type", type);
-	element.setAttribute("value", type);
-	element.setAttribute("name", type);
-
-
-	var foo = document.getElementById("fooBar");
-
-	//Append the element in page (in span).
-	foo.appendChild(element);
-}
-
-function handleButton() {}
-
-
-function handleRadio() {}
-
-function add(type) {
-
-	if (type == "text")
-		handleText(type);
-	else if (type == input.button)
-		handleButton();
-	else if (type == input.radio)
-		handleRadio();
-
-
-
-}
-</SCRIPT>
-</HEAD>
-<BODY>
-<FORM>
-<H2>Dynamically add element in form.</H2>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Dynamically add Textbox, Radio, Button in html Form using JavaScript</title>
+<script scr="./script.js"></script>
+</head>
+<body>
+<form>
+<h2>Dynamically add element in form.</h2>
 Select the element and hit Add to add it in form.
-<BR/>
-<SELECT name="element">
-	<OPTION value="button">Button</OPTION>
-	<OPTION value="text">Textbox</OPTION>
-	<OPTION value="radio">Radio</OPTION>
-</SELECT>
+<br>
+<select name="element">
+	<option value="button">Button</option>
+	<option value="text">Textbox</option>
+	<option value="radio">Radio</option>
+</select>
 
-<INPUT type="button" value="Add" onclick="add(document.forms[0].element.value)"/>
+<input type="button" value="Add" onclick="add(document.forms[0].element.value)"/>
 
-<span id="fooBar"></br></span>
+<span id="fooBar"><br></span>
 
-</FORM>
-</BODY>
-</HTML>
+</form>
+</body>
+</html>
