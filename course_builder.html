@@ -2,23 +2,30 @@
 <html>
 <head>
 <title>Dynamically add Textbox, Radio, Button in html Form using JavaScript</title>
-<script scr="./script.js"></script>
+<script src="script.js"></script>
 </head>
 <body>
+
 <form>
-<h2>Dynamically add element in form.</h2>
-Select the element and hit Add to add it in form.
-<br>
-<select name="element">
-	<option value="button">Button</option>
-	<option value="text">Textbox</option>
-	<option value="radio">Radio</option>
-</select>
-
-<input type="button" value="Add" onclick="add(document.forms[0].element.value)"/>
-
-<span id="fooBar"><br></span>
-
+<div>
+	<h2>Dynamically add element in form.</h2>
+</div>
+<div>
+	Select the element and hit Add to add it in form.
+</div>
+<div>
+	<select name="element">
+		<option value="button" id="addButton">Button</option>
+		<option value="text" id="addText">Textbox</option>
+		<option value="radio" id="addRadio">Radio</option>
+	</select>
+	<input type="button" value="Add" id="addType" onclick="add(event)"/>
+</div>
 </form>
+
+<div>
+	<span id="fooBar"><br></span>
+</div>
 </body>
 </html>
+
