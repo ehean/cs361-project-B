@@ -121,6 +121,10 @@ function createButton(parent, buttonType, eleType ) {
 		button.addEventListener("click", add);
 	}
 
+	if (buttonType === "Save") {
+		button.addEventListener("click", editContent);
+	}
+
 	//append button 
 	parent.appendChild(button);
 	event.preventDefault();
@@ -140,8 +144,47 @@ function addContent(event) {
 		var value = event.target.parentNode.firstElementChild.value;
 		var p = document.createElement("p");
 		p.setAttribute("id", "paragraph"+i);
+		var editButton = document.createElement("input");
+		editButton.setAttribute("type", "button");
+		editButton.setAttribute("id", "edit"+i);
+		editButton.setAttribute("value", "Edit");
+		editButton.addEventListener("click", function (event){
+			console.log(event);
+			var dynForm = document.getElementById("dynamicForm");
+			//clearDynForm(dynForm);
+
+			//Create an input type dynamically.
+			var newDiv = document.createElement("div");
+			var element = document.createElement("textArea");
+
+			var type = "Text";
+			//Assign different attributes to the element.
+			element.setAttribute("type", type);
+			element.innerHTML = event.target.previousElementSibling.textContent;
+			element.setAttribute("name", type);
+			element.setAttribute("id", "newText");
+			element.rows="10";
+			element.cols="50";
+
+			var br = document.createElement("br");
+
+			//Append the element in page (in span).
+			newDiv.appendChild(element);
+			newDiv.appendChild(br);
+
+			/***************** changes *************************/
+			createButton(newDiv, "Cancel", type);
+			createButton(newDiv, "Save", p.id);
+
+			dynForm.appendChild(newDiv);
+
+			event.stopPropagation();
+			event.preventDefault();
+		});
+
 		p.innerHTML = value;
 		div.appendChild(p);
+		div.appendChild(editButton);
 		parent.appendChild(div);
 		deleteElement(event);
 	}
@@ -181,6 +224,14 @@ function addContent(event) {
 
 	i++;
 	
+}
+
+function editContent(event) {
+	console.log(event);
+	var prevP = event.target.name;
+	prevP = prevP.substring(4);
+	console.log(prevP);
+	document.getElementById(prevP).innerHTML = event.target.parentNode.firstElementChild.value;
 }
 
 /******** new ********/
