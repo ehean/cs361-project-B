@@ -46,23 +46,11 @@ function generateForm() {
 
 
 function add(event) {
-<<<<<<< HEAD
-	var type = event.target.parentNode.firstElementChild.value;
-
-	console.log(event);
-	console.log(event.target);
-	console.log(type);
-
-	if (type == "text")
-		handleText(type, event);
-	else if (type == input.button)
-=======
 	var type = event.target.parentNode.children[1].value;
 
 	if (type == "Text")
 		handleText(type);
 	else if (type == "Button")
->>>>>>> origin/master
 		handleButton();
 	else if (type == "Radio")
 		handleRadio();
@@ -75,32 +63,16 @@ function add(event) {
 	event.preventDefault();
 }
 
-<<<<<<< HEAD
-function handleText(type, event) {
-	//var type = event.target.parentNode.firstElementChild.value;
-	console.log("handle text called\n");
-=======
 function handleText(type) {
 	//empty all content in dynamicForm div
 	var dynForm = document.getElementById("dynamicForm");
 	clearDynForm(dynForm);
->>>>>>> origin/master
 
 	//Create an input type dynamically.
 	var newDiv = document.createElement("div");
-	var newText = document.createElement("textArea");
+	var element = document.createElement("textArea");
 
 	//Assign different attributes to the element.
-<<<<<<< HEAD
-	newText.setAttribute("type", type);
-	newText.setAttribute("value", type);
-	newText.setAttribute("name", type);
-	newText.setAttribute("id", "newText");
-	newText.rows="10";
-	newText.cols="50";
-
-	var mainContainer = document.getElementById("mainContainer");
-=======
 	element.setAttribute("type", type);
 	element.setAttribute("value", type);
 	element.setAttribute("name", type);
@@ -108,18 +80,11 @@ function handleText(type) {
 	element.rows="10";
 	element.cols="50";
 
->>>>>>> origin/master
 	var br = document.createElement("br");
 
 	//Append the element in page (in span).
-	newDiv.appendChild(newText);
+	newDiv.appendChild(element);
 	newDiv.appendChild(br);
-<<<<<<< HEAD
-	createButton(newDiv, "Cancel", event);
-	createButton(newDiv, "Submit", event);
-
-	mainContainer.appendChild(newDiv);
-=======
 
 	/***************** changes *************************/
 	createButton(newDiv, "Cancel", type);
@@ -128,7 +93,6 @@ function handleText(type) {
 	dynForm.appendChild(newDiv);
 
 	event.stopPropagation();
->>>>>>> origin/master
 	event.preventDefault();
 }
 
@@ -137,14 +101,8 @@ function handleButton() {}
 
 function handleRadio() {}
 
-<<<<<<< HEAD
-
-function createButton(parent, type, event) {
-	//var type = event.target.parentNode.firstElementChild.value;
-=======
 /***************** changes *************************/
 function createButton(parent, buttonType, eleType ) {
->>>>>>> origin/master
 	//create a button and set it attributes
 	var button = document.createElement("input");
 	button.setAttribute("id", buttonType);
@@ -230,7 +188,7 @@ function addContent(event) {
 		parent.appendChild(div);
 		deleteElement(event);
 	}
-	
+
 	//add a header to course content
 	if (event.target.name === "SubmitHeader") {
 		var header;
@@ -265,7 +223,7 @@ function addContent(event) {
 	}
 
 	i++;
-	
+
 }
 
 function editContent(event) {
@@ -290,9 +248,6 @@ function handleHeader(type) {
 	var dynForm = document.getElementById("dynamicForm");
 	clearDynForm(dynForm);
 
-<<<<<<< HEAD
-function deleteElement(event) {}
-=======
 	//header of all available types
 	var h1 = document.createElement("h1");
 	h1.innerHTML = "Header";
@@ -326,7 +281,7 @@ function deleteElement(event) {}
 	header.innerHTML = "Select header size: ";
 	div.appendChild(header);
 
-	//create a radio button for each header choices 
+	//create a radio button for each header choices
 	for (var i = 6; i > 0; i--) {
 		var radio = document.createElement("input");
 		radio.setAttribute("type", "radio");
@@ -371,4 +326,3 @@ function clearDynForm(parent) {
 		}
 	}
 }
->>>>>>> origin/master
