@@ -24,7 +24,7 @@ function generateForm() {
 	select.setAttribute("id", "selectMenu");
 
 	//add options to the menu
-	var menuOptions = ["Header", "Button", "Text", "Radio"];
+	var menuOptions = ["Header", "Text"];
 	for (var i = 0; i < menuOptions.length; i++) {
 		var option = document.createElement("option");
 		option.setAttribute("id", "add" + menuOptions[i]);
@@ -44,25 +44,21 @@ function generateForm() {
 	document.getElementById("menu").appendChild(form);
 }
 
-
+// add appropriate components to the form
 function add(event) {
 	var type = event.target.parentNode.children[1].value;
 
 	if (type == "Text")
 		handleText(type);
-	else if (type == "Button")
-		handleButton();
-	else if (type == "Radio")
-		handleRadio();
-
-	/*************changes*******************/
-	else if (type === "Header")
+	else if (type === "Header"){
 		handleHeader(type);
 
+	}
 	event.stopPropagation();
 	event.preventDefault();
 }
 
+//create textbox
 function handleText(type) {
 	//empty all content in dynamicForm div
 	var dynForm = document.getElementById("dynamicForm");
@@ -86,7 +82,7 @@ function handleText(type) {
 	newDiv.appendChild(element);
 	newDiv.appendChild(br);
 
-	/***************** changes *************************/
+	//append cancel and submit buttons
 	createButton(newDiv, "Cancel", type);
 	createButton(newDiv, "Submit", type);
 
@@ -96,12 +92,7 @@ function handleText(type) {
 	event.preventDefault();
 }
 
-function handleButton() {}
-
-
-function handleRadio() {}
-
-/***************** changes *************************/
+//create button according to buttonType and add appropriate event listener
 function createButton(parent, buttonType, eleType ) {
 	//create a button and set it attributes
 	var button = document.createElement("input");
@@ -125,12 +116,16 @@ function createButton(parent, buttonType, eleType ) {
 		button.addEventListener("click", editContent);
 	}
 
+	if (buttonType === "Delete") {
+		button.addEventListener("click", deleteElement);
+	}
+
 	//append button 
 	parent.appendChild(button);
 	event.preventDefault();
 }
 
-/******** new ********/
+//add user's submitted content to the page
 function addContent(event) {
 	console.log("submit button clicked");
 	console.log(event);
@@ -144,14 +139,17 @@ function addContent(event) {
 		var value = event.target.parentNode.firstElementChild.value;
 		var p = document.createElement("p");
 		p.setAttribute("id", "paragraph"+i);
+
+		//edit button for editing
 		var editButton = document.createElement("input");
 		editButton.setAttribute("type", "button");
 		editButton.setAttribute("id", "edit"+i);
 		editButton.setAttribute("value", "Edit");
+
+		//populated the textbox with value already entered for editing
 		editButton.addEventListener("click", function (event){
 			console.log(event);
 			var dynForm = document.getElementById("dynamicForm");
-			//clearDynForm(dynForm);
 
 			//Create an input type dynamically.
 			var newDiv = document.createElement("div");
@@ -172,7 +170,7 @@ function addContent(event) {
 			newDiv.appendChild(element);
 			newDiv.appendChild(br);
 
-			/***************** changes *************************/
+			//append cancel and save button 
 			createButton(newDiv, "Cancel", type);
 			createButton(newDiv, "Save", p.id);
 
@@ -185,6 +183,7 @@ function addContent(event) {
 		p.innerHTML = value;
 		div.appendChild(p);
 		div.appendChild(editButton);
+		createButton(div, "Delete", div.id);
 		parent.appendChild(div);
 		deleteElement(event);
 	}
@@ -214,10 +213,47 @@ function addContent(event) {
 		}
 
 		//get header title
-		header.innerHTML = event.target.parentNode.children[21].value;
+		header.innerHTML = document.getElementById("newText").value;
 		header.setAttribute("id", "header"+i);
+
 		//append to div
 		div.appendChild(header);
+
+		//edit button for editing
+		var editButton = document.createElement("input");
+		editButton.setAttribute("type", "button");
+		editButton.setAttribute("id", "edit"+i);
+		editButton.setAttribute("value", "Edit");
+
+		//populate editing form with entered value
+		editButton.addEventListener("click", function (event){
+			//create a header for input
+			var dynForm = document.getElementById("dynamicForm");
+			var newDiv = document.createElement("div");
+			var header2 = document.createElement("h3");
+			header2.innerHTML = "Enter header: ";
+			header2.style.display = "inline";
+			newDiv.appendChild(header2);
+
+			//create text input for header title
+			var textInput = document.createElement("input");
+			textInput.setAttribute("type", "text");
+			textInput.setAttribute("id", "newText");
+			textInput.setAttribute("size", 50);
+			console.log(event.target.previousElementSibling.textContent);
+			textInput.value = event.target.previousElementSibling.textContent;
+			newDiv.appendChild(textInput);
+
+			//create cancel, submit buttons
+			createButton(newDiv, "Cancel", header.id);
+			createButton(newDiv, "Save", header.id);
+
+			dynForm.appendChild(newDiv);
+
+		});
+
+		div.appendChild(editButton);
+		createButton(div, "Delete", div.id);
 		parent.appendChild(div);
 		deleteElement(event);
 	}
@@ -226,15 +262,20 @@ function addContent(event) {
 	
 }
 
+//edit content after user's hit save
 function editContent(event) {
-	console.log(event);
+	//get element we are editing
 	var prevP = event.target.name;
 	prevP = prevP.substring(4);
-	console.log(prevP);
-	document.getElementById(prevP).innerHTML = event.target.parentNode.firstElementChild.value;
+
+	//get new value and set to element.innerHTML
+	document.getElementById(prevP).innerHTML = document.getElementById("newText").value;
+
+	//delete form
+	deleteElement(event);
 }
 
-/******** new ********/
+//delete an element from the page - usually the dynamic form
 function deleteElement(event) {
 	console.log(event);
 	var parentElementToDelete = event.target.parentNode.parentNode;
@@ -242,7 +283,7 @@ function deleteElement(event) {
 	parentElementToDelete.removeChild(elementToDelete);
 }
 
-/******** new ********/
+//present header options and textbox for user to entered
 function handleHeader(type) {
 	//empty all content in dynamicForm div
 	var dynForm = document.getElementById("dynamicForm");
@@ -318,7 +359,7 @@ function handleHeader(type) {
 	dynForm.appendChild(div);
 }
 
-/*********** new **********************/
+//clear dynamic form from page
 function clearDynForm(parent) {
 	if (parent.childElementCount > 0) {
 		while (parent.firstChild != null) {
