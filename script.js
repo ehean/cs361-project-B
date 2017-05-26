@@ -222,7 +222,11 @@ function addContent(event) {
 		//edit button for editing
 		var editButton = document.createElement("input");
 		editButton.setAttribute("type", "button");
+
 		editButton.setAttribute("id", "Edit");
+
+		editButton.setAttribute("id", "edit"+i);
+
 		editButton.setAttribute("value", "Edit");
 
 		//populate editing form with entered value
