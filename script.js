@@ -116,15 +116,11 @@ function createButton(parent, buttonType, eleType ) {
 		button.addEventListener("click", editContent);
 	}
 
-<<<<<<< HEAD
 	if (buttonType === "Delete") {
 		button.addEventListener("click", deleteElement);
 	}
 
-	//append button 
-=======
 	//append button
->>>>>>> origin/master
 	parent.appendChild(button);
 	event.preventDefault();
 }
