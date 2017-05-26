@@ -116,11 +116,15 @@ function createButton(parent, buttonType, eleType ) {
 		button.addEventListener("click", editContent);
 	}
 
+<<<<<<< HEAD
 	if (buttonType === "Delete") {
 		button.addEventListener("click", deleteElement);
 	}
 
 	//append button 
+=======
+	//append button
+>>>>>>> origin/master
 	parent.appendChild(button);
 	event.preventDefault();
 }
@@ -187,7 +191,7 @@ function addContent(event) {
 		parent.appendChild(div);
 		deleteElement(event);
 	}
-	
+
 	//add a header to course content
 	if (event.target.name === "SubmitHeader") {
 		var header;
@@ -259,7 +263,7 @@ function addContent(event) {
 	}
 
 	i++;
-	
+
 }
 
 //edit content after user's hit save
@@ -322,7 +326,7 @@ function handleHeader(type) {
 	header.innerHTML = "Select header size: ";
 	div.appendChild(header);
 
-	//create a radio button for each header choices 
+	//create a radio button for each header choices
 	for (var i = 6; i > 0; i--) {
 		var radio = document.createElement("input");
 		radio.setAttribute("type", "radio");
