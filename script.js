@@ -143,7 +143,7 @@ function addContent(event) {
 		//edit button for editing
 		var editButton = document.createElement("input");
 		editButton.setAttribute("type", "button");
-		editButton.setAttribute("id", "edit"+i);
+		editButton.setAttribute("id", "Edit");
 		editButton.setAttribute("value", "Edit");
 
 		//populated the textbox with value already entered for editing
@@ -225,7 +225,7 @@ function addContent(event) {
 
 		editButton.setAttribute("id", "Edit");
 
-		editButton.setAttribute("id", "edit"+i);
+		editButton.setAttribute("id", "Edit");
 
 		editButton.setAttribute("value", "Edit");
 
