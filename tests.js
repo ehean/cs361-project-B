@@ -22,7 +22,8 @@ QUnit.test("add header button clicked", function(assert) {
     assert.ok(document.getElementById("Cancel") != null, "Cancel button created");
 });
 
-QUnit.test("cancel button clicked", function(assert) {
+
+QUnit.test("header cancel button clicked", function(assert) {
 	document.getElementById("Cancel").click();
 	assert.ok(document.getElementById("newText") == null, "Form deleted");
 });
@@ -38,7 +39,7 @@ QUnit.test("header submit button clicked", function(assert) {
 });
 
 QUnit.test("edit header", function(assert){
-	document.getElementById("Edit").click();
+	document.getElementById("edit0").click();
 	assert.ok(document.getElementById("newText") != null, "Edit Form created");
 	document.getElementById("newText").value = "New Testing";
 	document.getElementById("Save").click();
@@ -48,4 +49,29 @@ QUnit.test("edit header", function(assert){
 QUnit.test("delete header", function(assert) {
 	document.getElementById("Delete").click();
 	assert.ok(document.getElementById("courseContent").childElementCount == 0, "Header deleted");
+});
+
+QUnit.test("add text button clicked", function(assert) {
+	document.getElementById("selectMenu").value == "Text";
+	document.getElementById("Add").click();
+	assert.ok(document.getElementById("dynamicForm").childElementCount > 0, "Form created");
+	assert.ok(document.getElementById("newText") != null, "Text box created");
+    assert.ok(document.getElementById("Submit") != null, "Submit buton created");
+    assert.ok(document.getElementById("Cancel") != null, "Cancel button created");
+});
+
+
+QUnit.test("add text cancel button clicked", function(assert) {
+	document.getElementById("Cancel").click();
+	assert.ok(document.getElementById("newText") == null, "Form deleted");
+});
+
+
+QUnit.test("add text submit button clicked", function(assert) {
+	document.getElementById("selectMenu").value = "Text";
+	document.getElementById("Add").click();
+	assert.ok(document.getElementById("newText") != null, "Form created");
+   	document.getElementById("newText").value = "Testing";
+   	document.getElementById("Submit").click();
+   	assert.equal(document.getElementById("courseContent").lastElementChild.children.paragraph1.innerHTML, "Testing", "text added");
 });
