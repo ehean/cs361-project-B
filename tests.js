@@ -75,3 +75,16 @@ QUnit.test("add text submit button clicked", function(assert) {
    	document.getElementById("Submit").click();
    	assert.equal(document.getElementById("courseContent").lastElementChild.children.paragraph1.innerHTML, "Testing", "text added");
 });
+
+QUnit.test("edit text", function(assert) {
+	document.getElementById("edit1").click();
+	assert.ok(document.getElementById("newText") != null, "Form created");
+	document.getElementById("newText").value = "New Testing";
+	document.getElementById("Save").click();
+	assert.equal(document.getElementById("courseContent").lastElementChild.children.paragraph1.innerHTML, "New Testing", "text edited");
+});
+
+QUnit.test("delete text", function(assert) {
+	document.getElementById("Delete").click();
+	assert.ok(document.getElementById("courseContent").childElementCount == 0, "text deleted");
+});
