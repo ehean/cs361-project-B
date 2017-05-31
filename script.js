@@ -18,6 +18,8 @@ function createInput(parent, child, type, innerText) {
 		createTextArea(child, type, innerText);
 	else if (type === "Header")
 		createHeaders(child);
+	else if (type === "Image")
+		createImage(child);
 	//Append the element in page (in span).
 
 
@@ -175,7 +177,7 @@ function generateForm() {
 	//select.setAttribute("id", "selectMenu");
 
 	//add options to the menu
-	var menuOptions = ["Header", "Text"];
+	var menuOptions = ["Header", "Text", "Image"];
 	createDropdown(menuOptions, "elementDropdown", form, "Select Element:  ");
 
 	//append drop down to form
@@ -197,6 +199,9 @@ function add(event) {
 	else if (type === "Header"){
 		handleHeader(type);
 	}
+	else if (type === "Image"){
+		handleImage(type);
+	}
 	event.stopPropagation();
 	event.preventDefault();
 }
@@ -205,7 +210,7 @@ function add(event) {
 function handleText(type) {
 	//empty all content in dynamicForm div
 	var dynForm = document.getElementById("dynamicForm");
-	clearDynForm(dynForm);
+	//clearDynForm(dynForm);
 
 	//Create an input type dynamically.
 	var newDiv = document.createElement("div");
@@ -225,6 +230,34 @@ function handleHeader(type) {
 	//append div to dynForm
 	//dynForm.appendChild(newDiv);
 }
+
+function handleImage(type) {
+	var parent = document.getElementById("dynamicForm");
+	var img = document.createElement("div");
+	img.setAttribute("id", "image")
+	var file = document.createElement("input");
+	file.setAttribute("type", "file");
+	file.setAttribute("id", "imgID");
+	file.style.display = "block";
+	parent.appendChild(img);
+	parent.appendChild(file);
+	document.getElementById('imgID').addEventListener('change', readURL);
+	createButton(parent, "Cancel", type);
+	createButton(parent, "Submit", type);
+}
+
+function readURL(){
+	var file = document.getElementById("imgID").files[0];
+	var reader = new FileReader();
+	reader.onloadend = function(){
+		document.getElementById("image").style.backgroundImage = "url(" + reader.result + ")";        
+	}
+	if(file)
+		reader.readAsDataURL(file);
+
+	else{
+	}
+} 
 
 //create button according to buttonType and add appropriate event listener
 function createButton(parent, buttonType, eleType ) {
@@ -430,6 +463,16 @@ function addContent(event) {
 		deleteElement(event);
 	}
 
+	if (event.target.name === "SubmitImage") {
+		console.log("SubmitImage clicked");
+		var image = document.createElement("div");
+		console.log(event.target.parentElement.innerHTML);
+		image.appendChild(document.getElementById("image"));
+		createButton(image, "Delete", image.id);
+		parent.appendChild(image);
+		clearDynForm(document.getElementById("dynamicForm"));
+	}
+
 	i++;
 
 }
@@ -454,7 +497,6 @@ function deleteElement(event) {
 	var elementToDelete = event.target.parentNode;
 	parentElementToDelete.removeChild(elementToDelete);
 }
-
 
 
 //clear dynamic form from page
