@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", generateForm);
 
+var fontOptions = [ "Normal", "Bold", "Light", "Italic", "Courier", "Times Roman"];
+
 i = 0;
 
 
@@ -18,7 +20,8 @@ function createInput(parent, child, type, innerText) {
 		createTextArea(child, type, innerText);
 	else if (type === "Header")
 		createHeaders(child);
-	//Append the element in page (in span).
+	else if (type === "Image")
+		createImage();
 
 
 	//append cancel and submit buttons
@@ -28,10 +31,12 @@ function createInput(parent, child, type, innerText) {
 	parent.appendChild(child);
 }
 
+function createImage() {
+	;
+}
+
 function createDropdown(menuOptions, id, parent, label) {
 
-	// var br = document.createElement("br");
-	// parent.appendChild(br);
 	var lab = document.createElement("label");
 	lab.innerHTML = label;
 	lab.style.display = 'block';
@@ -53,17 +58,7 @@ function createDropdown(menuOptions, id, parent, label) {
 // this function creates a text area
 function createTextArea(parent, type, innerText) {
 	var element = document.createElement("textArea");
-	var fontDropdown = document.createElement("select");
-
-	var select = document.createElement("select");
-
 	element.innerHTML = innerText;
-	select.setAttribute("id", "fontDropdown");
-
-	//add options to the menu
-
-	// //
-	var menuOptions = [ "Normal", "Bold", "Light", "Italic", "Courier", "Times Roman"];
 
 	//Assign different attributes to the element.
 	element.setAttribute("type", type);
@@ -77,7 +72,7 @@ function createTextArea(parent, type, innerText) {
 	parent.appendChild(element);
 	parent.appendChild(br);
 	parent.appendChild(br);
-	createDropdown(menuOptions, "fontDropdown", parent, "Select Font:  ");
+	createDropdown(fontOptions, "fontDropdown", parent, "Select Font:  ");
 	parent.appendChild(br);
 }
 
@@ -85,32 +80,14 @@ function createTextArea(parent, type, innerText) {
 function createHeaders(parent) {
 
 	//header of all available types
-	var menuOptions = [ "Normal", "Bold", "Light", "Italic", "Courier", "Times Roman"];
-	var h1 = document.createElement("h1");
-	h1.innerHTML = "Header";
-	h1.style.display = "inline";
 
-	var h2 = document.createElement("h2");
-	h2.innerHTML = "Header";
-	h2.style.display = "inline";
+	var headers = [];
 
-	var h3 = document.createElement("h3");
-	h3.innerHTML = "Header";
-	h3.style.display = "inline";
-
-	var h4 = document.createElement("h4");
-	h4.innerHTML = "Header";
-	h4.style.display = "inline";
-
-	var h5 = document.createElement("h5");
-	h5.innerHTML = "Header";
-	h5.style.display = "inline";
-
-	var h6 = document.createElement("h6");
-	h6.innerHTML = "Header";
-	h6.style.display = "inline";
-
-	var headers = [h1, h2, h3, h4, h5, h6];
+	for (var i = 0; i < 6; ++i) {
+		headers.push(document.createElement("h" + i + 1));
+		headers[i].innerHTML = "Header";
+		headers[i].style.display = "inline";
+	}
 
 	//create a new div for header choices
 	var div = document.createElement("div");
@@ -147,7 +124,7 @@ function createHeaders(parent) {
 	textInput.setAttribute("size", 50);
 	div.appendChild(textInput);
 	div.appendChild(br);
-	createDropdown(menuOptions, "fontDropdown", div, "Select Font:  ");
+	createDropdown(fontOptions, "fontDropdown", div, "Select Font:  ");
 	div.appendChild(br);
 	parent.appendChild(div);
 
@@ -412,8 +389,7 @@ function addContent(event) {
 			newDiv.appendChild(textInput);
 
 			newDiv.appendChild(document.createElement("br"));
-			var menuOptions = [ "Normal", "Bold", "Light", "Italic", "Courier", "Times Roman"];
-			createDropdown(menuOptions, "fontDropdown", newDiv, "Select Font:  ");
+			createDropdown(fontOptions, "fontDropdown", newDiv, "Select Font:  ");
 			newDiv.appendChild(document.createElement("br"));
 
 			//create cancel, submit buttons
