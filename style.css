@@ -1,7 +1,21 @@
+body {
+	width: 90%;
+	padding: 1%;
+}
+
+label, input, select, textarea, #dynamicForm, #menu, #courseContent {
+	padding: 1%;
+}
+
+input {
+	margin: 1%;
+}
+
 #image{
 	background-image:url('');
     background-size:cover;
     background-position: center;
-    height: 250px; width: 250px;
+    height: 250px; 
+    width: 250px;
     border: 1px solid #bbb;
 }
