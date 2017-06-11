@@ -1,5 +1,5 @@
 # Course Builder
-Project B Group 12  
+CS361 - Project B Group 12  
   
 Open index.html in a web browser (preferably Google Chrome) to run the Course Builder. Select elements you'd like to dynamically add to the page from the dropdown list. Elements can be edited and deleted dynamically at any time. When you're done adding elements, you can view the page by clicking "View Page".  
 
